@@ -1,20 +1,53 @@
 using Dapper;
 using System.Data.SqlClient;
-public class BD{
-private static string conexion = @"Server=localhost;Database=Login;Trusted_Connection=True;";
-public static void añadirUsuario(Usuarios usuario){
-    string sql = "INSERT INTO Usuarios(Username, Contraseña, Nombre, Email, Telefono) VALUES (@pUsername, @pContraseña, @pNombre, @pEmail, @pTelefono)";
-    using(SqlConnection db = new SqlConnection(conexion)){
-        db.Execute(sql, new{pUsername = usuario.UserName, pContraseña = usuario.Contraseña, pNombre = usuario.Nombre, pEmail = usuario.Email, pTelefono = usuario.Telefono});
-    }
-}
-public static void BuscarPersona(string UserName, string password){
-    Usuarios usuario = null;
-    using(SqlConnection db = new SqlConnection(conexion)){
-        string sql = "SELECT * FROM Usuarios WHERE UserName = @pUsername AND Contraseña = @pPassword";
-        usuario = db.QueryFirstOrDefault<Usuarios>(sql, new{ pUsername = UserName, pPassword = password});
-    }
-}
 
+public class BD
+{
+    private static string conexion = @"Server=localhost;Database=Login;Trusted_Connection=True;";
 
+    public static void AñadirUsuario(Usuarios usuario)
+    {
+        string sql = "INSERT INTO Usuarios (Username, Contraseña, Nombre, Email, Telefono) VALUES (@pUsername, @pContraseña, @pNombre, @pEmail, @pTelefono)";
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            db.Execute(sql, new 
+            {
+                pUsername = usuario.UserName,
+                pContraseña = usuario.Contraseña,
+                pNombre = usuario.Nombre,
+                pEmail = usuario.Email,
+                pTelefono = usuario.Telefono
+            });
+        }
+    }
+
+    public static Usuarios BuscarPersona(string userName, string password)
+    {
+        Usuarios usuario = null;
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            string sql = "SELECT * FROM Usuarios WHERE Username = @pUsername AND Contraseña = @pPassword";
+            usuario = db.QueryFirstOrDefault<Usuarios>(sql, new { pUsername = userName, pPassword = password });
+        }
+        return usuario;
+    }
+
+    public static bool UsuarioExiste(string userName)
+    {
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            string sql = "SELECT COUNT(*) FROM Usuarios WHERE Username = @pUsername";
+            int count = db.ExecuteScalar<int>(sql, new { pUsername = userName });
+            return count > 0;
+        }
+    }
+
+    public static void CambiarContraseña(string userName, string nuevaContraseña)
+    {
+        string sql = "UPDATE Usuarios SET Contraseña = @pNuevaContraseña WHERE Username = @pUsername";
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            db.Execute(sql, new { pNuevaContraseña = nuevaContraseña, pUsername = userName });
+        }
+    }
 }
