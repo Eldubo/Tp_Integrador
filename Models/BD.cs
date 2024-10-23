@@ -1,6 +1,6 @@
 using Dapper;
 using System.Data.SqlClient;
-
+// si tira error el dapper no darle bola ejecutar solo
 public class BD
 {
     private static string conexion = @"Server=localhost;Database=Login;Trusted_Connection=True;";
@@ -10,7 +10,7 @@ public class BD
         string sql = "INSERT INTO Usuarios (Username, Contraseña, Nombre, Email, Telefono) VALUES (@pUsername, @pContraseña, @pNombre, @pEmail, @pTelefono)";
         using (SqlConnection db = new SqlConnection(conexion))
         {
-            db.Execute(sql, new 
+            db.Execute(sql, new
             {
                 pUsername = usuario.UserName,
                 pContraseña = usuario.Contraseña,
@@ -31,17 +31,6 @@ public class BD
         }
         return usuario;
     }
-
-    public static bool UsuarioExiste(string userName)
-    {
-        using (SqlConnection db = new SqlConnection(conexion))
-        {
-            string sql = "SELECT COUNT(*) FROM Usuarios WHERE Username = @pUsername";
-            int count = db.ExecuteScalar<int>(sql, new { pUsername = userName });
-            return count > 0;
-        }
-    }
-
     public static void CambiarContraseña(string userName, string nuevaContraseña)
     {
         string sql = "UPDATE Usuarios SET Contraseña = @pNuevaContraseña WHERE Username = @pUsername";
@@ -50,4 +39,5 @@ public class BD
             db.Execute(sql, new { pNuevaContraseña = nuevaContraseña, pUsername = userName });
         }
     }
+   
 }
