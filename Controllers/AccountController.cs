@@ -12,7 +12,15 @@ public class AccountController : Controller
     {
         _logger = logger;
     }
-
+    
+     public IActionResult Login()
+     {
+           return View();
+     }
+    public IActionResult Register(){
+        return View();
+    }
+    
     [HttpPost]
     public IActionResult Login(Usuarios usuario)
     {
@@ -34,10 +42,10 @@ public IActionResult Register(Usuarios usuario)
     if (usuarioEncontrado == null)
     {
         BD.AñadirUsuario(usuario);
-        return RedirectToAction("Login"); // O cualquier otra acción como confirmación
+        return RedirectToAction("Login");
     }
 
-    ModelState.AddModelError("", "El usuario ya existe.");
+    ViewBag.Error = ("El usuario ya existe.");
     return View(usuario);
 }
 

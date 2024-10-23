@@ -2,7 +2,11 @@
     ViewData["Title"] = "Index";
 }
 
-<div>
+<div class = "Login">
     <h1>Index</h1>
-    <a href="/Account/Register" >Login</a>
+    <a href="@Url.Action("Login", "Account")">Login</a>
+</div>
+<div class = "Login">
+    <h1>Index</h1>
+    <a href="@Url.Action("Register", "Account")">Registrate</a>
 </div>

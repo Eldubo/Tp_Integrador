@@ -1,45 +1,49 @@
 @model Usuarios
 
-@{
-    ViewData["Title"] = "Registro de Usuario";
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="~/wwwroot/css/Register.css">
+</head>
+<body>
 
-<h2>Registro</h2>
-
-<form asp-action="Register" method="post">
-    <div class="form-group">
-        <label asp-for="UserName"></label>
-        <input asp-for="UserName" class="form-control" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
+<div class="container">
+    <div class="image-container">
+        <img src="~/images/tu_imagen.jpg" alt="Imagen de perro y dueño">
     </div>
     
-    <div class="form-group">
-        <label asp-for="Contraseña"></label>
-        <input asp-for="Contraseña" type="password" class="form-control" />
-        <span asp-validation-for="Contraseña" class="text-danger"></span>
-    </div>
-    
-    <div class="form-group">
-        <label asp-for="Nombre"></label>
-        <input asp-for="Nombre" class="form-control" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
-    </div>
+    <form id = "formRegistro" asp-action="Register" method="post">
+        <h2>Registro</h2>
+        
+        <label for="username">Usuario</label>
+        <input type="text" id="username" name="UserName" placeholder="Usuario" value="@Model.UserName" required>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" type="email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="Nombre" placeholder="Nombre" value="@Model.Nombre" required>
 
-    <div class="form-group">
-        <label asp-for="Telefono"></label>
-        <input asp-for="Telefono" class="form-control" />
-        <span asp-validation-for="Telefono" class="text-danger"></span>
-    </div>
+        <label for="apellido">Apellido</label>
+        <input type="text" id="apellido" name="Apellido" placeholder="Apellido" required>
 
-    <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
+        <label for="email">Mail</label>
+        <input type="email" id="email" name="Email" placeholder="Mail" value="@Model.Email" required>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="Telefono" placeholder="Teléfono" value="@Model.Telefono" required>
+
+        <label for="contraseña">Contraseña</label>
+        <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
+
+        <label for="confirmarContraseña">Confirmar Contraseña</label>
+        <input type="password" id="contraseña2" name="ConfirmarContraseña" placeholder="Confirmar Contraseña" required>
+
+        <input type="submit" value="Siguiente">
+        
+        <a href="@Url.Action("Login", "Account")">¿Ya tienes una cuenta? Inicia Sesión</a>
+    </form>
+</div>
+
+</body>
+</html>
