@@ -18,7 +18,8 @@ public class AccountController : Controller
            return View();
      }
     public IActionResult Register(){
-        return View();
+        var model = new Usuarios();
+        return View(model);
     }
     
     [HttpPost]

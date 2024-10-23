@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="~/wwwroot/css/Register.css">
+    <script src="~/wwwroot/js/register.js"></script>
 </head>
 <body>
 
@@ -15,7 +16,7 @@
         <img src="~/images/tu_imagen.jpg" alt="Imagen de perro y dueño">
     </div>
     
-    <form id = "formRegistro" asp-action="Register" method="post">
+    <form id="formRegistro" asp-action="Register" method="post" onsubmit="return validarFormulario();">
         <h2>Registro</h2>
         
         <label for="username">Usuario</label>
@@ -23,9 +24,6 @@
 
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="Nombre" placeholder="Nombre" value="@Model.Nombre" required>
-
-        <label for="apellido">Apellido</label>
-        <input type="text" id="apellido" name="Apellido" placeholder="Apellido" required>
 
         <label for="email">Mail</label>
         <input type="email" id="email" name="Email" placeholder="Mail" value="@Model.Email" required>
@@ -40,7 +38,7 @@
         <input type="password" id="contraseña2" name="ConfirmarContraseña" placeholder="Confirmar Contraseña" required>
 
         <input type="submit" value="Siguiente">
-        
+
         <a href="@Url.Action("Login", "Account")">¿Ya tienes una cuenta? Inicia Sesión</a>
     </form>
 </div>
