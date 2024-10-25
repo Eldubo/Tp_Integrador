@@ -19,7 +19,7 @@ function validarFormulario() {
         return false;
     }
 
-    // Si pasa todas las validaciones, se envía el formulario
+    
     alert("Contraseña válida");
-    return true;
+    document.getElementById('registerForm').submit();
 }

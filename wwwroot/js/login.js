@@ -1,0 +1,1 @@
+let contrasela = document.getElementById("contraseña").value
