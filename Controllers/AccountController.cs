@@ -30,7 +30,7 @@ public class AccountController : Controller
             var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, usuario.Contraseña);
             if (usuarioEncontrado != null)
             {
-                return RedirectToAction("Bienvenida", "Home");
+                return RedirectToAction("Bienvenida", "Account");
             }
             ViewBag.Error = "Nombre de usuario o contraseña incorrectos.";
         }

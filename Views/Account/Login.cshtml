@@ -1,9 +1,10 @@
-<link src = "~/css/Login.css">
+<link rel="stylesheet" href="~/css/Login.css">
 <h1>Inicio de sesion </h1>
 <form id="loginForm"asp-action="Login" method="post">
     <label for="username">Usuario</label>
-    <input type="text" id="username" name="UserName" placeholder="Usuario" value="@Model.UserName" required>
+    <input type="text" id="username" name="UserName" placeholder="Usuario"required>
 
     <label for="contraseña">Contraseña</label>
     <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
+    <button type="submit">Enviar</button>
 </form>

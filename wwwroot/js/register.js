@@ -1,25 +1,19 @@
-function validarFormulario() {
-    let contraseña = document.getElementById("contraseña").value;
-    let contraseña2 = document.getElementById("contraseña2").value;
-
-    if (contraseña !== contraseña2) {
-        alert("Las contraseñas no coinciden");
-        return false;
+function validarContraseña(){
+    let contraseña1 = document.getElementById("contraseña")
+    let contraseña2 = document.getElementById("contraseña2")
+    if(contraseña1 !== contraseña2){
+        alert("Las contraseñas no coinciden")
     }
-    if (contraseña.length < 8) {
-        alert("La contraseña debe tener al menos 8 caracteres");
-        return false;
+    else if(contraseña1.length < 8){
+        alert("La contraseña debe tener mas de 8 caracteres")
     }
-    if (!/[A-Z]/.test(contraseña)) {
-        alert("La contraseña debe contener al menos una letra mayúscula");
-        return false;
+    else if (!/[A-Z]/.test(contraseña1)){
+        alert("La contraseña debe tener una letra mayuscula")
     }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(contraseña)) {
-        alert("La contraseña debe contener al menos un carácter especial");
-        return false;
+    else if(!/[!@#$%^&*(),.?":{}|<>]/.test(contraseña1)){
+        alert("La contraseña debe tener un caracter especial (!@#$%^&*(),.?:{}|<></>)")
     }
-
-    
-    alert("Contraseña válida");
-    document.getElementById('registerForm').submit();
+    else {
+    document.getElementById("registerForm").submit();
+    }
 }
