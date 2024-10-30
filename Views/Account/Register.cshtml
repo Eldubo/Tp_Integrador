@@ -7,13 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="~/css/Register.css">
-    <script src="~/wwwroot/js/register.js"></script>
 </head>
 <body>
 
 <div class="container">
     <div class="image-container">
-        <img src="~/images/tu_imagen.jpg" alt="Imagen de perro y dueño">
+        <img src="~/images/tu_imagen.jpg" alt="Imagen de perro y duenio">
     </div>
     
     <form id="registerForm" asp-action="Register" method="post">
@@ -31,17 +30,17 @@
         <label for="telefono">Teléfono</label>
         <input type="tel" id="telefono" name="Telefono" placeholder="Teléfono" value="@Model.Telefono" required>
 
-        <label for="contraseña">Contraseña</label>
+        <label for="contrasenia">Contraseña</label>
         <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
 
-        <label for="confirmarContraseña">Confirmar Contraseña</label>
-        <input type="password" id="contraseña2" name="ConfirmarContraseña" placeholder="Confirmar Contraseña" required>
+        <label for="confirmarContrasenia">Confirmar Contrasenia</label>
+        <input type="password" id="contraseña2" name="ConfirmarContrasenia" placeholder="Confirmar Contrasenia" required>
 
-        <button type="button" onclick="validarContraseña()">Registrate</button>
+        <button type="button" onclick="validarContrasenia()">Registrate</button>
 
         <a href="@Url.Action("Login", "Account")">¿Ya tienes una cuenta? Inicia Sesión</a>
     </form>
 </div>
-
+<script src="~/js/register.js"></script>
 </body>
 </html>

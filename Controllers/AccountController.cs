@@ -23,18 +23,16 @@ public class AccountController : Controller
     }
     
     [HttpPost]
-    public IActionResult Login(Usuarios usuario)
+    public IActionResult Login(string username, string contraseña)
     {
-        if (ModelState.IsValid)
-        {
-            var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, usuario.Contraseña);
+            var usuarioEncontrado = BD.BuscarPersona(username, contraseña);
             if (usuarioEncontrado != null)
             {
-                return RedirectToAction("Bienvenida", "Account");
+                return RedirectToAction("Bienvenida");
             }
             ViewBag.Error = "Nombre de usuario o contraseña incorrectos.";
-        }
-        return View(usuario);
+        
+        return View();
     }
    [HttpPost]
 public IActionResult Register(Usuarios usuario)

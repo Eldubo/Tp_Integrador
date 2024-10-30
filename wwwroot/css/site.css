@@ -1,6 +1,8 @@
 html {
   font-size: 14px;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
@@ -10,10 +12,12 @@ html {
 }
 
 body {
-  margin: 10px;
+  margin: 0;
   padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
-
 
 footer {
   margin: 10px;

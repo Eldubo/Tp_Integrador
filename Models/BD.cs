@@ -1,6 +1,5 @@
 using Dapper;
 using System.Data.SqlClient;
-// si tira error el dapper no darle bola ejecutar solo
 public class BD
 {
     private static string conexion = @"Server=localhost;Database=Login;Trusted_Connection=True;";
