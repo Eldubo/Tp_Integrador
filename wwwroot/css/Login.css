@@ -1,6 +1,9 @@
+/* Login.css */
+
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #D1B586; /* Color de fondo claro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,43 +11,77 @@ body {
     margin: 0;
 }
 
-h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-form {
-    background: white;
+/* Contenedor del formulario */
+#loginForm {
+    background-color: #AD8763; /* Color de fondo del formulario */
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Título */
+h1 {
+    color: #362F27; /* Color del texto del título */
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+/* Etiquetas y campos de entrada */
 label {
     display: block;
+    color: #362F27; /* Color de las etiquetas */
+    font-weight: bold;
     margin-bottom: 5px;
-    color: #555;
 }
 
-input {
+input[type="text"],
+input[type="password"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #865433; /* Color del borde */
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-button {
+/* Botón de envío */
+button[type="submit"] {
     width: 100%;
+    background-color: #AF7C4D; /* Color del botón */
+    color: #FFF;
     padding: 10px;
-    background-color: #007BFF;
-    color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+button[type="submit"]:hover {
+    background-color: #865433; /* Color de fondo al hacer hover */
+}
+
+/* Mensaje de error */
+.mensaje-error {
+    margin-top: 15px;
+    text-align: center;
+    color: #362F27; /* Color del texto del mensaje de error */
+}
+
+.mensaje-error p {
+    color: #AF4C4C; /* Color del mensaje de error */
+    font-weight: bold;
+}
+
+.mensaje-error a {
+    color: #362F27;
+    text-decoration: none;
+    margin: 5px;
+    font-size: 0.9em;
+}
+
+.mensaje-error a:hover {
+    text-decoration: underline;
 }

@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="~/css/Login.css">
 <h1>Inicio de sesion </h1>
+
 <form id="loginForm"asp-action="Login" method="post">
     <label for="username">Usuario</label>
     <input type="text" id="username" name="UserName" placeholder="Usuario"required>
@@ -8,3 +9,12 @@
     <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
     <button type="submit">Enviar</button>
 </form>
+
+<div class="mensaje-error">
+<a href="@Url.Action("Register", "Account")">¿No tenés cuenta? Registrate</a>
+@if (!string.IsNullOrEmpty(ViewBag.Error)){
+<p id="error">@ViewBag.Error</p>
+    <a href="@Url.Action("Login", "Account")">Volver a intentar</a>
+    <a href="@Url.Action("RecuperarContraseña", "Account")">Recuperar contraseña</a>
+}
+</div>

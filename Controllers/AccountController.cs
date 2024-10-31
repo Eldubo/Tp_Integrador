@@ -17,10 +17,6 @@ public class AccountController : Controller
      {
            return View();
      }
-    public IActionResult Register(){
-        var model = new Usuarios();
-        return View(model);
-    }
     
     [HttpPost]
     public IActionResult Login(string username, string contraseña)
@@ -30,10 +26,15 @@ public class AccountController : Controller
             {
                 return RedirectToAction("Bienvenida");
             }
-            ViewBag.Error = "Nombre de usuario o contraseña incorrectos.";
+            ViewBag.Error = "Contraseña incorreta";
         
         return View();
     }
+    public IActionResult Register(){
+        var model = new Usuarios();
+        return View(model);
+    }
+
    [HttpPost]
 public IActionResult Register(Usuarios usuario)
 {
@@ -63,6 +64,8 @@ public IActionResult Register(Usuarios usuario)
         return View();
     }
     public IActionResult Bienvenida(){
+        return View();
+    }public IActionResult RecuperarContraseña(){
         return View();
     }
 }

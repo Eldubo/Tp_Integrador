@@ -12,7 +12,7 @@
 
 <div class="container">
     <div class="image-container">
-        <img src="~/images/tu_imagen.jpg" alt="Imagen de perro y duenio">
+        <img src="~/img/perro-paseando.jpg" alt="Imagen de perro y duenio">
     </div>
     
     <form id="registerForm" asp-action="Register" method="post">
@@ -37,6 +37,8 @@
         <input type="password" id="contraseña2" name="ConfirmarContrasenia" placeholder="Confirmar Contrasenia" required>
 
         <button type="button" onclick="validarContrasenia()">Registrate</button>
+
+        <input type="submit" value="registrarConSubmit">
 
         <a href="@Url.Action("Login", "Account")">¿Ya tienes una cuenta? Inicia Sesión</a>
     </form>
