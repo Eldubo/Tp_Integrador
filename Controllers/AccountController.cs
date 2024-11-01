@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PrimerProyecto.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace PrimerProyecto.Controllers;
 
@@ -12,60 +14,92 @@ public class AccountController : Controller
     {
         _logger = logger;
     }
-    
-     public IActionResult Login()
-     {
-           return View();
-     }
-    
+
+    public IActionResult Login()
+    {
+        return View();
+    }
+
     [HttpPost]
     public IActionResult Login(string username, string contraseña)
     {
-            var usuarioEncontrado = BD.BuscarPersona(username, contraseña);
-            if (usuarioEncontrado != null)
-            {
-                return RedirectToAction("Bienvenida");
-            }
-            ViewBag.Error = "Contraseña incorreta";
-        
+        // Hashea la contraseña ingresada
+        string hashedPassword = HashPassword(contraseña);
+        var usuarioEncontrado = BD.BuscarPersona(username, hashedPassword);
+
+        if (usuarioEncontrado != null)
+        {
+            return RedirectToAction("Bienvenida");
+        }
+
+        ViewBag.Error = "Contraseña incorrecta";
         return View();
     }
-    public IActionResult Register(){
+
+    public IActionResult Register()
+    {
         var model = new Usuarios();
         return View(model);
     }
 
-   [HttpPost]
-public IActionResult Register(Usuarios usuario)
-{
-    var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, usuario.Contraseña);
-    if (usuarioEncontrado == null)
+    [HttpPost]
+    public IActionResult Register(Usuarios usuario)
     {
-        BD.AñadirUsuario(usuario);
-        return RedirectToAction("Login");
-    }
+        // Hashea la contraseña antes de guardarla
+        usuario.Contraseña = HashPassword(usuario.Contraseña);
 
-    ViewBag.Error = ("El usuario ya existe.");
-    return View(usuario);
-}
+        var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, usuario.Contraseña);
+        if (usuarioEncontrado == null)
+        {
+            BD.AñadirUsuario(usuario);
+            return RedirectToAction("Login");
+        }
+
+        ViewBag.Error = "El usuario ya existe.";
+        return View(usuario);
+    }
 
     public IActionResult CambiarContraseña(Usuarios usuario, string nuevaContraseña)
     {
         ViewBag.Mensaje = "";
-        var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, usuario.Contraseña);
+        string hashedPassword = HashPassword(usuario.Contraseña);
+        var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, hashedPassword);
+
         if (usuarioEncontrado != null)
-            {
-                BD.CambiarContraseña(usuario.UserName, nuevaContraseña);
-             ViewBag.Mensaje = "La contraseña fue cambiada con exito";
-            }
-            else{
-                ViewBag.Mensaje = "Usuario no encontrado";
-            }
+        {
+            string nuevaContraseñaHasheada = HashPassword(nuevaContraseña);
+            BD.CambiarContraseña(usuario.UserName, nuevaContraseñaHasheada);
+            ViewBag.Mensaje = "La contraseña fue cambiada con éxito";
+        }
+        else
+        {
+            ViewBag.Mensaje = "Usuario no encontrado";
+        }
         return View();
     }
-    public IActionResult Bienvenida(){
+
+    public IActionResult Bienvenida()
+    {
         return View();
-    }public IActionResult RecuperarContraseña(){
+    }
+
+    public IActionResult RecuperarContraseña()
+    {
         return View();
+    }
+
+    private string HashPassword(string password)
+    {
+        using (SHA256 sha256 = SHA256.Create())
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(password);
+            byte[] hash = sha256.ComputeHash(bytes);
+
+            StringBuilder result = new StringBuilder();
+            foreach (byte b in hash)
+                result.Append(b.ToString("x2"));
+
+            return result.ToString();
+        }
     }
 }

@@ -1,5 +1,8 @@
 using Dapper;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
+
 public class BD
 {
     private static string conexion = @"Server=localhost;Database=Login;Trusted_Connection=True;";
@@ -30,6 +33,7 @@ public class BD
         }
         return usuario;
     }
+
     public static void CambiarContraseña(string userName, string nuevaContraseña)
     {
         string sql = "UPDATE Usuarios SET Contraseña = @pNuevaContraseña WHERE Username = @pUsername";
@@ -38,5 +42,4 @@ public class BD
             db.Execute(sql, new { pNuevaContraseña = nuevaContraseña, pUsername = userName });
         }
     }
-   
 }
