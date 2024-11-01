@@ -15,7 +15,8 @@
         <img src="~/img/perro-paseando.jpg" alt="Imagen de perro y duenio">
     </div>
     
-    <form id="registerForm" asp-action="Register" method="post">
+    <form id="registerForm" asp-action="Register" method="post"
+        onsubmit="return validarContrasenia()">
         <h2>Registro</h2>
         
         <label for="username">Usuario</label>
