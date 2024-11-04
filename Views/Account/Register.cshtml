@@ -12,11 +12,10 @@
 
 <div class="container">
     <div class="image-container">
-        <img src="~/img/perro-paseando.jpg" alt="Imagen de perro y duenio">
+        <img src="~/img/perro-paseando.jpg" alt="Imagen de perro y dueño">
     </div>
     
-    <form id="registerForm" asp-action="Register" method="post"
-        onsubmit="return validarContrasenia()">
+    <form id="registerForm" asp-action="Register" method="post" onsubmit="return validarContrasenia()">
         <h2>Registro</h2>
         
         <label for="username">Usuario</label>
@@ -31,15 +30,13 @@
         <label for="telefono">Teléfono</label>
         <input type="tel" id="telefono" name="Telefono" placeholder="Teléfono" value="@Model.Telefono" required>
 
-        <label for="contrasenia">Contraseña</label>
+        <label for="contraseña">Contraseña</label>
         <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
 
-        <label for="confirmarContrasenia">Confirmar Contrasenia</label>
-        <input type="password" id="contraseña2" name="ConfirmarContrasenia" placeholder="Confirmar Contrasenia" required>
+        <label for="contraseña2">Confirmar Contraseña</label>
+        <input type="password" id="contraseña2" name="ConfirmarContrasenia" placeholder="Confirmar Contraseña" required>
 
-        <button type="button" onclick="validarContrasenia()">Registrate</button>
-
-        <input type="submit" value="registrarConSubmit">
+        <input type="submit" value="Regístrate">
 
         <a href="@Url.Action("Login", "Account")">¿Ya tienes una cuenta? Inicia Sesión</a>
     </form>
