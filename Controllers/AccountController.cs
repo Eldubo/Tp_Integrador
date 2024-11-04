@@ -23,7 +23,6 @@ public class AccountController : Controller
     [HttpPost]
     public IActionResult Login(string username, string contraseña)
     {
-        // Hashea la contraseña ingresada
         string hashedPassword = HashPassword(contraseña);
         var usuarioEncontrado = BD.BuscarPersona(username, hashedPassword);
 
@@ -45,7 +44,6 @@ public class AccountController : Controller
     [HttpPost]
     public IActionResult Register(Usuarios usuario)
     {
-        // Hashea la contraseña antes de guardarla
         usuario.Contraseña = HashPassword(usuario.Contraseña);
 
         var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, usuario.Contraseña);
