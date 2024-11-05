@@ -5,7 +5,7 @@ using System.Text;
 
 public class BD
 {
-    private static string conexion = @"Server=localhost;Database=Login;Trusted_Connection=True;";
+    private static string conexion = @"Server=localhost;Database=Huellitas;Trusted_Connection=True;";
 
     public static void AñadirUsuario(Usuarios usuario)
     {
