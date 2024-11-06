@@ -1,0 +1,29 @@
+#header {
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%; 
+    background-color:#D1B586;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#header a {
+  display: block;
+  color:#D1B586;
+  text-align: center;
+  padding:  20px ;
+  text-decoration: none;
+}
+ #header img {
+    align-items: right;
+    width: 5%;
+    height: 5%;
+  }
+ #header li a {
+    background-color:#865433;
+    }

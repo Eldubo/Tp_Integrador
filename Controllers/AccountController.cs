@@ -21,11 +21,11 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public IActionResult Login(string username, string contraseña)
+    public IActionResult Login(string mail, string contraseña)
     {
         string hashedPassword = HashPassword(contraseña);
-        var usuarioEncontrado = BD.BuscarPersona(username, hashedPassword);
-
+        var usuarioEncontrado = BD.BuscarPersona(mail, hashedPassword);
+    
         if (usuarioEncontrado != null)
         {
             return RedirectToAction("Bienvenida");
@@ -37,16 +37,16 @@ public class AccountController : Controller
 
     public IActionResult Register()
     {
-        var model = new Usuarios();
+        var model = new Usuario();
         return View(model);
     }
 
     [HttpPost]
-    public IActionResult Register(Usuarios usuario)
+    public IActionResult Register(Usuario usuario)
     {
         usuario.Contraseña = HashPassword(usuario.Contraseña);
 
-        var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, usuario.Contraseña);
+        var usuarioEncontrado = BD.BuscarPersona(usuario.Email, usuario.Contraseña);
         if (usuarioEncontrado == null)
         {
             BD.AñadirUsuario(usuario);
@@ -57,16 +57,16 @@ public class AccountController : Controller
         return View(usuario);
     }
 
-    public IActionResult CambiarContraseña(Usuarios usuario, string nuevaContraseña)
+    public IActionResult CambiarContraseña(Usuario usuario, string nuevaContraseña)
     {
         ViewBag.Mensaje = "";
         string hashedPassword = HashPassword(usuario.Contraseña);
-        var usuarioEncontrado = BD.BuscarPersona(usuario.UserName, hashedPassword);
+        var usuarioEncontrado = BD.BuscarPersona(usuario.Email, hashedPassword);
 
         if (usuarioEncontrado != null)
         {
             string nuevaContraseñaHasheada = HashPassword(nuevaContraseña);
-            BD.CambiarContraseña(usuario.UserName, nuevaContraseñaHasheada);
+            BD.CambiarContraseña(usuario.Email, nuevaContraseñaHasheada);
             ViewBag.Mensaje = "La contraseña fue cambiada con éxito";
         }
         else

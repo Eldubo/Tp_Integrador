@@ -1,21 +1,25 @@
 using System.ComponentModel.DataAnnotations;
 
-public class Usuarios
+public class Usuario
 {
-        public string UserName { get; set; }
     public string Contraseña { get; set; }
     public string Nombre { get; set; }
     public string Email { get; set; }
     public string Telefono { get; set; }
+    public string Apellido {get;set; }
+    public int DNI {get;set; }
+    public DateTime Fnac {get;set; }
 
-    public Usuarios() {}
+    public Usuario() {}
 
-    public Usuarios(string user, string pass, string name, string mail, string tel)
+    public Usuario(string nombre, DateTime Fnac, string mail, string tel, int dni, string apellido, string pass)
     {
-        UserName = user;
-        Contraseña = pass;
-        Nombre = name;
-        Email = mail;
-        Telefono = tel;
+        this.Nombre = nombre;
+        this.Apellido = apellido;
+        this.Contraseña = pass;
+        this.Nombre = nombre;
+        this.Email = mail;
+        this.Telefono = tel;
+        this.DNI = dni;
     }
 }

@@ -11,12 +11,22 @@ html {
   }
 }
 
+:root {
+  --dark-brown: #362F27;
+  --brown: #865433;
+  --light-brown: #AF7C4D;
+  --medium-brown: #AD8763;
+  --beige: #D1B586;
+}
+
 body {
-  margin: 0;
-  padding: 10px;
-  flex: 1;
+  background-color: var(--beige); /* Fondo beige para toda la página */
+  font-family: 'Arial', sans-serif;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
 }
 
 footer {

@@ -7,39 +7,41 @@ public class BD
 {
     private static string conexion = @"Server=localhost;Database=Huellitas;Trusted_Connection=True;";
 
-    public static void AñadirUsuario(Usuarios usuario)
+    public static void AñadirUsuario(Usuario usuario)
     {
-        string sql = "INSERT INTO Usuarios (Username, Contraseña, Nombre, Email, Telefono) VALUES (@pUsername, @pContraseña, @pNombre, @pEmail, @pTelefono)";
+        string sql = "INSERT INTO Usuario (Contraseña, Nombre, Email, Telefono, DNI, Apellido, Fnac) VALUES (@pContraseña, @pNombre, @pEmail, @pTelefono, @pdni, @papellido, @pfnac)";
         using (SqlConnection db = new SqlConnection(conexion))
         {
             db.Execute(sql, new
             {
-                pUsername = usuario.UserName,
                 pContraseña = usuario.Contraseña,
                 pNombre = usuario.Nombre,
                 pEmail = usuario.Email,
-                pTelefono = usuario.Telefono
+                pTelefono = usuario.Telefono,
+                pdni = usuario.DNI,
+                papellido = usuario.Apellido,
+                pfnac = usuario.Fnac
             });
         }
     }
 
-    public static Usuarios BuscarPersona(string userName, string password)
+    public static Usuario BuscarPersona(string mail, string password)
     {
-        Usuarios usuario = null;
+        Usuario usuario = null;
         using (SqlConnection db = new SqlConnection(conexion))
         {
-            string sql = "SELECT * FROM Usuarios WHERE Username = @pUsername AND Contraseña = @pPassword";
-            usuario = db.QueryFirstOrDefault<Usuarios>(sql, new { pUsername = userName, pPassword = password });
+            string sql = "SELECT * FROM Usuario WHERE Email = @pmail AND Contraseña = @pPassword";
+            usuario = db.QueryFirstOrDefault<Usuario>(sql, new { pmail = mail, pPassword = password });
         }
         return usuario;
     }
 
-    public static void CambiarContraseña(string userName, string nuevaContraseña)
+    public static void CambiarContraseña(string mail, string nuevaContraseña)
     {
-        string sql = "UPDATE Usuarios SET Contraseña = @pNuevaContraseña WHERE Username = @pUsername";
+        string sql = "UPDATE Usuario SET Contraseña = @pNuevaContraseña WHERE Email = @pMail";
         using (SqlConnection db = new SqlConnection(conexion))
         {
-            db.Execute(sql, new { pNuevaContraseña = nuevaContraseña, pUsername = userName });
+            db.Execute(sql, new { pNuevaContraseña = nuevaContraseña, pMail = mail });
         }
     }
 }

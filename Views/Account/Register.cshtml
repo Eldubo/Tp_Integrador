@@ -1,4 +1,4 @@
-@model Usuarios
+@model Usuario
 
 <!DOCTYPE html>
 <html lang="es">
@@ -7,40 +7,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="~/css/Register.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
-<div class="container">
-    <div class="image-container">
-        <img src="~/img/perro-paseando.jpg" alt="Imagen de perro y dueño">
-    </div>
-    
-    <form id="registerForm" asp-action="Register" method="post" onsubmit="return validarContrasenia()">
-        <h2>Registro</h2>
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="row">
+        <div class="col-lg-6 image-container">
+            <img src="~/img/perro-paseando.jpg" alt="Imagen de perro y dueño">
+        </div>
         
-        <label for="username">Usuario</label>
-        <input type="text" id="username" name="UserName" placeholder="Usuario" value="@Model.UserName" required>
+        <div class="col-lg-6">
+            <form id="registerForm" asp-action="Register" method="post" onsubmit="return validarContrasenia()">
+                <h2 class="text-center">Registro</h2>
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="Nombre" class="form-control" placeholder="Nombre" value="@Model.Nombre" required>
+                </div>
 
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="Nombre" placeholder="Nombre" value="@Model.Nombre" required>
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="Apellido" class="form-control" placeholder="Apellido" value="@Model.Apellido" required>
+                </div>
 
-        <label for="email">Mail</label>
-        <input type="email" id="email" name="Email" placeholder="Mail" value="@Model.Email" required>
+                <div class="form-group">
+                    <label for="dni">DNI</label>
+                    <input type="number" id="dni" name="DNI" class="form-control" placeholder="DNI" value="@Model.DNI" required>
+                </div>
 
-        <label for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="Telefono" placeholder="Teléfono" value="@Model.Telefono" required>
+                <div class="form-group">
+                    <label for="email">Mail</label>
+                    <input type="email" id="email" name="Email" class="form-control" placeholder="Mail" value="@Model.Email" required>
+                </div>
 
-        <label for="contraseña">Contraseña</label>
-        <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="Telefono" class="form-control" placeholder="Teléfono" value="@Model.Telefono" required>
+                </div>
 
-        <label for="contraseña2">Confirmar Contraseña</label>
-        <input type="password" id="contraseña2" name="ConfirmarContrasenia" placeholder="Confirmar Contraseña" required>
+                <div class="form-group">
+                    <label for="fnac">Fecha de Nacimiento</label>
+                    <input type="date" id="fnac" name="Fnac" class="form-control" value="@Model.Fnac.ToString("yyyy-MM-dd")" required>
+                </div>
 
-        <input type="submit" value="Regístrate">
+                <div class="form-group">
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="Contraseña" class="form-control" placeholder="Contraseña" required>
+                </div>
 
-        <a href="@Url.Action("Login", "Account")">¿Ya tienes una cuenta? Inicia Sesión</a>
-    </form>
+                <div class="form-group">
+                    <label for="contraseña2">Confirmar Contraseña</label>
+                    <input type="password" id="contraseña2" name="ConfirmarContrasenia" class="form-control" placeholder="Confirmar Contraseña" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Regístrate</button>
+
+                <div class="text-center mt-3">
+                    <a href="@Url.Action("Login", "Account")" class="text-dark">¿Ya tienes una cuenta? Inicia Sesión</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
 <script src="~/js/register.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
