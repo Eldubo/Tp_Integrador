@@ -56,25 +56,29 @@ public class AccountController : Controller
         ViewBag.Error = "El usuario ya existe.";
         return View(usuario);
     }
-
-    public IActionResult CambiarContraseña(Usuario usuario, string nuevaContraseña)
-    {
-        ViewBag.Mensaje = "";
-        string hashedPassword = HashPassword(usuario.Contraseña);
-        var usuarioEncontrado = BD.BuscarPersona(usuario.Email, hashedPassword);
-
-        if (usuarioEncontrado != null)
-        {
-            string nuevaContraseñaHasheada = HashPassword(nuevaContraseña);
-            BD.CambiarContraseña(usuario.Email, nuevaContraseñaHasheada);
-            ViewBag.Mensaje = "La contraseña fue cambiada con éxito";
-        }
-        else
-        {
-            ViewBag.Mensaje = "Usuario no encontrado";
-        }
+    public IActionResult CambiarContraseña(){
         return View();
     }
+[HttpPost]
+    public IActionResult CambiarContraseña(string Email, string nuevaContraseña, string Contraseña)
+{
+    ViewBag.Mensaje = "";
+    string hashedPassword = HashPassword(Contraseña);
+    var usuarioEncontrado = BD.BuscarPersona(Email, hashedPassword);
+
+    if (usuarioEncontrado != null)
+    {
+        string nuevaContraseñaHasheada = HashPassword(nuevaContraseña);
+        BD.CambiarContraseña(Email, nuevaContraseñaHasheada);
+        ViewBag.Mensaje = "La contraseña fue cambiada con éxito";
+    }
+    else
+    {
+        ViewBag.Mensaje = "Usuario no encontrado";
+    }
+    return View();
+}
+
 
     public IActionResult Bienvenida()
     {

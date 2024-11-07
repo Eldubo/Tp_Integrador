@@ -44,4 +44,6 @@ public class BD
             db.Execute(sql, new { pNuevaContraseña = nuevaContraseña, pMail = mail });
         }
     }
+
+    
 }
