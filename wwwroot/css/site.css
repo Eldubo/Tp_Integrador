@@ -20,19 +20,28 @@ html {
 }
 
 body {
-  background-color: var(--beige); /* Fondo beige para toda la página */
+  background-color: var(--beige);
   font-family: 'Arial', sans-serif;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
   margin: 0;
 }
 
+header {
+  width: auto;
+  height: auto;
+}
+
 footer {
+  width: 100%;
+  display: grid;
   margin: 10px;
   padding: 10px;
-  background-color: #f8f9fa;
+  background-color: var(--beige);
   border-top: 1px solid #e9ecef;
   color: #0B1215;
+  text-align: center;
 }

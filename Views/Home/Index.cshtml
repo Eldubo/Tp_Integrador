@@ -1,12 +1,109 @@
-﻿@{
-    ViewData["Title"] = "Index";
-}
-<link rel="stylesheet" href="~/css/index.css">
-<div class = "Login">
-    <h1>Inicia Sesion</h1>
-    <a href="@Url.Action("Login", "Account")">Login</a>
-</div>
-<div class = "Login">
-    <h1>Registrate</h1>
-    <a href="@Url.Action("Register", "Account")">Registrate</a>
-</div>
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huellitas Felices - Inicio</title>
+    <link rel="stylesheet" href="~/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMUSc9caGxOnKPz8wG8LIbk5/hd1JiQ+9H6p6zm" crossorigin="anonymous">
+    <script src="~/js/script.js"></script>
+</head>
+<body>
+
+    <!-- Encabezado con imagen y barra de búsqueda -->
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <img src="~/img/logo.png" alt="Huellitas Felices">
+            </div>
+            <div class="user-icons">
+                <a href="#"><i class="fas fa-user"></i></a>
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+        </div>
+        <div class="hero">
+            <img src="~/img/perro.jpg" alt="Paseo de perros" class="hero-image">
+            <div class="search-bar">
+                <input type="text" placeholder="Paseo" class="search-input">
+                <input type="text" placeholder="CABA" class="search-input">
+                <button class="search-button">Buscar</button>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Sección "Qué Somos" -->
+    <section class="about fade-in">
+        <div class="titulo">
+            <h2>Que Somos</h2>
+        </div>
+        <div class="texto">
+            <p>Liberamos a personas con agendas apretadas para que disfruten de sus mascotas sin preocuparse por paseos largos. Sabemos que en la vida moderna, el tiempo es un recurso escaso, y muchas veces, los dueños de mascotas se sienten culpables por no poder dedicar el tiempo necesario a sus fieles amigos. Por eso, más que un simple servicio, somos una comunidad comprometida que mejora la vida de dueños y perros, promoviendo el bienestar canino y generando empleo digno para quienes comparten nuestra pasión por los animales.</p>
+            <p>En un mundo donde el tiempo es un recurso escaso y las responsabilidades diarias abruman, "Huellitas Felices" nace con la misión de liberar a las personas adultas con agendas sobrecargadas, permitiéndoles disfrutar de la compañía de una mascota sin preocuparse por los largos paseos que estas requieren. Entendemos que la falta de tiempo no debería ser una barrera para quienes desean el cariño de un perro en su vida, por lo que ofrecemos un servicio que se ocupa de esta necesidad, asegurando que las mascotas reciban el ejercicio y cuidado que merecen.</p>
+        </div>
+    </section>
+
+    <!-- Sección "Misión, Visión, Valores" -->
+    <section class="mission-vision-values fade-in">
+        <div class="mv-box">
+            <div class="titulo">
+                <h3>Mision</h3>
+            </div>
+            <div class="texto">
+                <p>Desempeñar la parte con mucha energía y amor, para que tu perro se sienta en casa, mientras tú trabajas o tienes ocupaciones importantes.</p>
+            </div>
+        </div>
+        <div class="mv-box">
+            <div class="titulo">
+                <h3>Vision</h3>
+            </div>
+            <div class="texto">
+                <p>Generar empleo digno, saludable y seguro para los paseadores y que tu perro pueda disfrutar de cada minuto.</p>
+            </div>
+        </div>
+        <div class="mv-box">
+            <div class="titulo">
+                <h3>Valores</h3>
+            </div>
+            <div class="texto">
+                <p>Mejorar la calidad de vida de las personas y sus perros. Reducir la soledad y fomentar la felicidad entre los paseadores y los dueños.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials fade-in">
+        <div class="testimonial">
+            <div class="profile-pic"></div>
+            <img src="~/img/asdfas.png" alt="user" class="user-img">
+            <h4>Nombre de usuario</h4>
+            <p>★★★★★</p>
+            <p>"El comentario que hizo"</p>
+        </div>
+        <div class="testimonial">
+            <div class="profile-pic"></div>
+            <img src="~/img/asdfas.png" alt="user" class="user-img">
+            <h4>Nombre de usuario</h4>
+            <p>★★★★★</p>
+            <p>"El comentario que hizo"</p>
+        </div>
+        <div class="testimonial">
+            <div class="profile-pic"></div>
+            <img src="~/img/asdfas.png" alt="user" class="user-img">
+            <h4>Nombre de usuario</h4>
+            <p>★★★★★</p>
+            <p>"El comentario que hizo"</p>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>Copyright © 2024 - Huellitas Felices Argentina</p>
+        <div class="social-icons">
+            <a href="#"><i class="fas fa-facebook"></i></a>
+            <a href="#"><i class="fas fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-twitter"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>
