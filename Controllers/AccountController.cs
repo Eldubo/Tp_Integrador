@@ -71,10 +71,12 @@ public class AccountController : Controller
         string nuevaContraseñaHasheada = HashPassword(nuevaContraseña);
         BD.CambiarContraseña(Email, nuevaContraseñaHasheada);
         ViewBag.Mensaje = "La contraseña fue cambiada con éxito";
+        ViewBag.MensajeTipo = "mensaje-exito";
     }
     else
     {
         ViewBag.Mensaje = "Usuario no encontrado";
+        ViewBag.MensajeTipo = "mensaje-error";
     }
     return View();
 }

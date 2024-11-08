@@ -1,13 +1,17 @@
 
 /* Importar las fuentes */
 @font-face {
-    font-family: 'Heyam';
-    src: url('~/fonts/Heyam.ttf') format('truetype');
+    font-family:'Heyam';
+    src: url('/wwwroot/fonts/Heyam.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'MADEAwelier';
-    src: url('~/fonts/MADEAwelierPERSONALUSE-ExtraBold.otf') format('truetype');
+    font-family:'MADEAwelier';
+    src: url('/wwwroot/fonts/MADEAwelierPERSONALUSE-ExtraBold.otf') format('opentype');
+    font-weight: bold;
+    font-style: bold;
 }
 
 /* Estilos generales */
