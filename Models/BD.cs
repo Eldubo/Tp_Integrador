@@ -45,5 +45,31 @@ public class BD
         }
     }
 
-    
+    public static string AgregarMascota(int id, Perro perro)
+{
+    string result = null;
+    string sql = "INSERT INTO Perro (Nombre, Fnac, IdUsuario) VALUES (@pNombre, @pFnac, @pIdUsuario)";
+    using (SqlConnection db = new SqlConnection(conexion))
+    {
+        db.Execute(sql, new
+        {
+            pNombre = perro.Nombre,
+            pFnac = perro.Fnac,
+            pIdUsuario = id
+        });
+        result = "La mascota fue añadida con éxito";
+    }
+    return result;
+}
+public static Usuario BuscarPersonaPorId(int id)
+{
+    Usuario usuario = null;
+    using (SqlConnection db = new SqlConnection(conexion))
+    {
+        string sql = "SELECT * FROM Usuario WHERE IdUsuario = @pId";
+        usuario = db.QueryFirstOrDefault<Usuario>(sql, new { pId = id });
+    }
+    return usuario;
+}
+
 }

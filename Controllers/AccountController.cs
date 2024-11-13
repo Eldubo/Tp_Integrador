@@ -28,7 +28,8 @@ public class AccountController : Controller
     
         if (usuarioEncontrado != null)
         {
-            return RedirectToAction("Bienvenida");
+            HttpContext.Session.SetInt32("UserId", usuarioEncontrado.Id);
+                return RedirectToAction("Index", "Home");
         }
 
         ViewBag.Error = "Contraseña incorrecta";
@@ -91,6 +92,24 @@ public class AccountController : Controller
     {
         return View();
     }
+public IActionResult añadirMascotaAUsuario (){
+    return View();
+}
+    [HttpPost]
+public IActionResult añadirMascotaAUsuario(Perro perro)
+{
+    int idUsuario = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+    string result = BD.AgregarMascota(idUsuario, perro);
+    if (result == null)
+    {
+        ViewBag.Mensaje = "Tu mascota no se pudo añadir con éxito";
+    }
+    else
+    {
+        ViewBag.Mensaje = result;
+    }
+    return View();
+}
 
     private string HashPassword(string password)
     {

@@ -19,24 +19,33 @@
                 <img src="img/logo.png" alt="Huellitas Felices">
             </div>
             <div class="user-icons">
-                <a href="@Url.Action("Login", "Account")"><i class="fas fa-user"></i></a>
-                <a href="#"><i class="fa-solid fa-calendar-days"  style="color: #2b2b2b;"></i></a>
+                @if (ViewBag.User != null)
+                {
+                    <h1>Bienvenido @ViewBag.User.Nombre</h1>
+                    <a href="#"><i class="fa-solid fa-calendar-days" style="color: #2b2b2b;"></i></a>
+                }
+                else
+                {
+                    <a href='@Url.Action("Login", "Account")'><i class="fas fa-user"></i></a>
+                }
             </div>
         </div>
         <div class="hero">
             <h2>Reserva tu paseo</h2>
             <img src="img/perro.jpg" alt="Paseo de perros" class="hero-image">
             <div class="search-bar">
-                <input type="text" placeholder="Paseo" class="search-input">
+                <div class="dropdown">
+                    <label for="options">Elige una opción:</label>
+                    <select id="options">
+                        <option value="opcion1">Paseo</option>
+                        <option value="opcion2">Cuidado</option>
+                    </select>
+                </div>
                 <input type="text" placeholder="CABA" class="search-input">
                 <button class="search-button">Buscar</button>
             </div>
         </div>
     </header>
-
-
-
-
     <!-- Sección "Qué Somos" -->
     <section class="about fade-in">
         <div class="titulo">
