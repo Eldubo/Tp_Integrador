@@ -40,7 +40,7 @@ public class BD
         Trabajador trabajador = null;
         using (SqlConnection db = new SqlConnection(conexion))
         {
-            string sql = "SELECT * FROM Trabajador WHERE Email = @pmail AND Contraseña = @pPassword";
+            string sql = "SELECT * FROM Trabajador WHERE Mail = @pmail AND Contraseña = @pPassword";
             trabajador = db.QueryFirstOrDefault<Trabajador>(sql, new { pmail = mail, pPassword = password });
         }
         return trabajador;
@@ -83,7 +83,7 @@ public static Usuario BuscarPersonaPorId(int id)
 }
 
 public static void AñadirTrabajador (Trabajador trabajador){
-    string sql = "INSERT INTO Trabajador (DNI, Nombre, Mail, Telefono, Fnac, CVUAlias, Paseo, Cuidado, Ciudad) VALUES (@pdni, @pNombre, @pMail, @pTelefono, @pFnac, @pcvualias, @pPaseo, @pCuidado, @pCiudad)";
+    string sql = "INSERT INTO Trabajador (DNI, Nombre, Mail, Telefono, Fnac, CVUAlias, Paseo, Cuidado, Ciudad, Contraseña) VALUES (@pdni, @pNombre, @pMail, @pTelefono, @pFnac, @pcvualias, @pPaseo, @pCuidado, @pCiudad, @pContraseña)";
     using (SqlConnection db = new SqlConnection(conexion)){
         db.Execute(sql, new
             {
@@ -95,7 +95,8 @@ public static void AñadirTrabajador (Trabajador trabajador){
                 pcvualias = trabajador.CVUAlias,
                 pPaseo = trabajador.Paseo,
                 pCuidado = trabajador.Cuidado,
-                pCiudad = trabajador.Ciudad
+                pCiudad = trabajador.Ciudad,
+                pContraseña = trabajador.Contraseña
             });
     }
 }

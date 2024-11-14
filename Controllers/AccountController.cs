@@ -42,15 +42,37 @@ public class AccountController : Controller
         return View(model);
     }
     public IActionResult RegistroPersonal(){
-        return View();
+        var model = new Trabajador();
+        return View(model);
+
     }
     [HttpPost]
-    public IActionResult RegistroPersonal (Trabajador tj){
-        tj.Contraseña = HashPassword(tj.Contraseña);
+public IActionResult RegistroPersonal(Trabajador tj)
+{
+    // Hasheando la contraseña antes de almacenarla en la base de datos
+    tj.Contraseña = HashPassword(tj.Contraseña);
+
+    // Asegurándonos de que las propiedades Paseo y Cuidado se convierten correctamente a valores booleanos
+tj.Paseo = !string.IsNullOrEmpty(tj.Paseo) && tj.Paseo == "true" ? "true" : "false";
+    tj.Cuidado = !string.IsNullOrEmpty(tj.Cuidado) && tj.Cuidado == "true" ? "true" : "false";
+
+    // Verificando si el trabajador ya existe en la base de datos
+    var trabajadorencontrado = BD.BuscarTrabajador(tj.Mail, tj.Contraseña);
+
+    if (trabajadorencontrado == null)
+    {
+        // Si no existe, añadimos el nuevo trabajador
         BD.AñadirTrabajador(tj);
-        RedirectToAction("Login");
-        return View();
+        return RedirectToAction("Login");
     }
+
+    // Si el trabajador ya existe, mostramos un mensaje de error
+    ViewBag.Error = "El trabajador ya existe.";
+    return View(tj);
+}
+
+
+
 
     [HttpPost]
     public IActionResult Register(Usuario usuario)

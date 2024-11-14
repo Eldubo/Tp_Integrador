@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Formulario de Registro de Trabajador</h1>
-    <form action="/trabajador/registrar" method="POST">
+    <form id="registerForm" asp-action="RegistroPersonal" method="post" onsubmit="return validarContrasenia()">
         <div>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -26,7 +26,7 @@
 
         <div>
             <label for="mail">Correo Electrónico:</label>
-            <input type="email" id="mail" name="mail" required>
+            <input type="email" id="mail" name="Mail" required>
         </div>
 
         <div>
@@ -36,27 +36,38 @@
 
         <div>
             <label for="cvu">CVU Alias:</label>
-            <input type="text" id="cvu" name="cvu" required>
+            <input type="text" id="cvu" name="CVUAlias" required>
         </div>
 
         <div>
-            <label for="paseo">¿Está disponible para Paseo?</label>
-            <input type="checkbox" id="paseo" name="paseo">
-        </div>
+    <label for="paseo">¿Está disponible para Paseo?</label>
+    <input type="checkbox" id="paseo" name="Paseo" value="true">
+</div>
 
-        <div>
-            <label for="cuidado">¿Está disponible para Cuidado?</label>
-            <input type="checkbox" id="cuidado" name="cuidado">
-        </div>
+<div>
+    <label for="cuidado">¿Está disponible para Cuidado?</label>
+    <input type="checkbox" id="cuidado" name="Cuidado" value="true">
+</div>
 
         <div>
             <label for="ciudad">Ciudad:</label>
-            <input type="text" id="ciudad" name="ciudad" required>
+            <input type="text" id="ciudad" name="Ciudad" required>
         </div>
+
+        <div class="form-group">
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="Contraseña" class="form-control" placeholder="Contraseña" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contraseña2">Confirmar Contraseña</label>
+                    <input type="password" id="contraseña2" name="ConfirmarContrasenia" class="form-control" placeholder="Confirmar Contraseña" required>
+                </div>
 
         <div>
             <button type="submit">Registrar Trabajador</button>
         </div>
     </form>
+    <script src="~/js/register.js"></script>
 </body>
 </html>
