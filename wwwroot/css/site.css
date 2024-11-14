@@ -29,19 +29,3 @@ body {
   min-height: 100vh;
   margin: 0;
 }
-
-header {
-  width: auto;
-  height: auto;
-}
-
-footer {
-  width: 100%;
-  display: grid;
-  margin: 10px;
-  padding: 10px;
-  background-color: var(--beige);
-  border-top: 1px solid #e9ecef;
-  color: #0B1215;
-  text-align: center;
-}

@@ -12,6 +12,7 @@
 
 <div class="mensaje-error">
 <a href="@Url.Action("Register", "Account")">¿No tenés cuenta? Registrate</a>
+<a href="@Url.Action("RegistroPersonal" ,"Account")"> Queres ser paseador/cuidador?</a>
 <a href="@Url.Action("CambiarContraseña","Account")">¿Olvidaste tu contraseña? Cambia tu contraseña</a>
 @if (!string.IsNullOrEmpty(ViewBag.Error)){
 <p id="error">@ViewBag.Error</p>

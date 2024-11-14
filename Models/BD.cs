@@ -1,4 +1,4 @@
-using Dapper;
+    using Dapper;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
@@ -25,7 +25,7 @@ public class BD
         }
     }
 
-    public static Usuario BuscarPersona(string mail, string password)
+    public static Usuario BuscarUsuario(string mail, string password)
     {
         Usuario usuario = null;
         using (SqlConnection db = new SqlConnection(conexion))
@@ -34,6 +34,16 @@ public class BD
             usuario = db.QueryFirstOrDefault<Usuario>(sql, new { pmail = mail, pPassword = password });
         }
         return usuario;
+    }
+    public static Trabajador BuscarTrabajador(string mail, string password)
+    {
+        Trabajador trabajador = null;
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            string sql = "SELECT * FROM Trabajador WHERE Email = @pmail AND Contraseña = @pPassword";
+            trabajador = db.QueryFirstOrDefault<Trabajador>(sql, new { pmail = mail, pPassword = password });
+        }
+        return trabajador;
     }
 
     public static void CambiarContraseña(string mail, string nuevaContraseña)
@@ -72,4 +82,21 @@ public static Usuario BuscarPersonaPorId(int id)
     return usuario;
 }
 
+public static void AñadirTrabajador (Trabajador trabajador){
+    string sql = "INSERT INTO Trabajador (DNI, Nombre, Mail, Telefono, Fnac, CVUAlias, Paseo, Cuidado, Ciudad) VALUES (@pdni, @pNombre, @pMail, @pTelefono, @pFnac, @pcvualias, @pPaseo, @pCuidado, @pCiudad)";
+    using (SqlConnection db = new SqlConnection(conexion)){
+        db.Execute(sql, new
+            {
+                pdni = trabajador.DNI,
+                pNombre = trabajador.Nombre,
+                pMail = trabajador.Mail,
+                pTelefono = trabajador.Telefono,
+                pFnac = trabajador.Fnac,
+                pcvualias = trabajador.CVUAlias,
+                pPaseo = trabajador.Paseo,
+                pCuidado = trabajador.Cuidado,
+                pCiudad = trabajador.Ciudad
+            });
+    }
+}
 }

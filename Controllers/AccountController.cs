@@ -24,7 +24,7 @@ public class AccountController : Controller
     public IActionResult Login(string mail, string contraseña)
     {
         string hashedPassword = HashPassword(contraseña);
-        var usuarioEncontrado = BD.BuscarPersona(mail, hashedPassword);
+        var usuarioEncontrado = BD.BuscarUsuario(mail, hashedPassword);
     
         if (usuarioEncontrado != null)
         {
@@ -41,13 +41,23 @@ public class AccountController : Controller
         var model = new Usuario();
         return View(model);
     }
+    public IActionResult RegistroPersonal(){
+        return View();
+    }
+    [HttpPost]
+    public IActionResult RegistroPersonal (Trabajador tj){
+        tj.Contraseña = HashPassword(tj.Contraseña);
+        BD.AñadirTrabajador(tj);
+        RedirectToAction("Login");
+        return View();
+    }
 
     [HttpPost]
     public IActionResult Register(Usuario usuario)
     {
         usuario.Contraseña = HashPassword(usuario.Contraseña);
 
-        var usuarioEncontrado = BD.BuscarPersona(usuario.Email, usuario.Contraseña);
+        var usuarioEncontrado = BD.BuscarUsuario(usuario.Email, usuario.Contraseña);
         if (usuarioEncontrado == null)
         {
             BD.AñadirUsuario(usuario);
@@ -65,7 +75,7 @@ public class AccountController : Controller
 {
     ViewBag.Mensaje = "";
     string hashedPassword = HashPassword(Contraseña);
-    var usuarioEncontrado = BD.BuscarPersona(Email, hashedPassword);
+    var usuarioEncontrado = BD.BuscarUsuario(Email, hashedPassword);
 
     if (usuarioEncontrado != null)
     {
