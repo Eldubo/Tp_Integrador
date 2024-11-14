@@ -10,13 +10,18 @@ body {
     height: 100vh;
     margin: 0;
 }
-
-/* Contenedor del formulario */
-#loginForm {
-    background-color: #AD8763; /* Color de fondo del formulario */
-    padding: 20px;
+#login{
+    padding: 10%;
+    width: 50%;
     border-radius: 10px;
-    width: 300px;
+    background-color: #865433;
+}
+/* Contenedor del formulario */
+#formulario {
+    /*background-color: #865433; /* Color de fondo del formulario */
+    /*padding: 20px;
+    border-radius: 10px;
+    width: 300px;*/
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -85,3 +90,4 @@ button[type="submit"]:hover {
 .mensaje-error a:hover {
     text-decoration: underline;
 }
+

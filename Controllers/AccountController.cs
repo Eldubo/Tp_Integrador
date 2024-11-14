@@ -49,24 +49,18 @@ public class AccountController : Controller
     [HttpPost]
 public IActionResult RegistroPersonal(Trabajador tj)
 {
-    // Hasheando la contraseña antes de almacenarla en la base de datos
     tj.Contraseña = HashPassword(tj.Contraseña);
 
-    // Asegurándonos de que las propiedades Paseo y Cuidado se convierten correctamente a valores booleanos
-tj.Paseo = !string.IsNullOrEmpty(tj.Paseo) && tj.Paseo == "true" ? "true" : "false";
+    tj.Paseo = !string.IsNullOrEmpty(tj.Paseo) && tj.Paseo == "true" ? "true" : "false";
     tj.Cuidado = !string.IsNullOrEmpty(tj.Cuidado) && tj.Cuidado == "true" ? "true" : "false";
 
-    // Verificando si el trabajador ya existe en la base de datos
     var trabajadorencontrado = BD.BuscarTrabajador(tj.Mail, tj.Contraseña);
 
     if (trabajadorencontrado == null)
     {
-        // Si no existe, añadimos el nuevo trabajador
         BD.AñadirTrabajador(tj);
         return RedirectToAction("Login");
     }
-
-    // Si el trabajador ya existe, mostramos un mensaje de error
     ViewBag.Error = "El trabajador ya existe.";
     return View(tj);
 }
@@ -144,17 +138,34 @@ public IActionResult añadirMascotaAUsuario(Perro perro)
 }
 
     private string HashPassword(string password)
+{
+    // Generar un salt aleatorio
+    byte[] saltBytes = new byte[16];
+    using (var rng = RandomNumberGenerator.Create())
     {
-        using (SHA256 sha256 = SHA256.Create())
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(password);
-            byte[] hash = sha256.ComputeHash(bytes);
-
-            StringBuilder result = new StringBuilder();
-            foreach (byte b in hash)
-                result.Append(b.ToString("x2"));
-
-            return result.ToString();
-        }
+        rng.GetBytes(saltBytes);
     }
+    
+    // Combinar el salt con la contraseña
+    byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+    byte[] passwordWithSaltBytes = new byte[saltBytes.Length + passwordBytes.Length];
+    Buffer.BlockCopy(saltBytes, 0, passwordWithSaltBytes, 0, saltBytes.Length);
+    Buffer.BlockCopy(passwordBytes, 0, passwordWithSaltBytes, saltBytes.Length, passwordBytes.Length);
+
+    // Calcular el hash del resultado
+    using (SHA256 sha256 = SHA256.Create())
+    {
+        byte[] hashBytes = sha256.ComputeHash(passwordWithSaltBytes);
+        
+        // Concatenar el salt y el hash en una sola cadena
+        StringBuilder result = new StringBuilder();
+        foreach (byte b in saltBytes)
+            result.Append(b.ToString("x2"));
+        
+        foreach (byte b in hashBytes)
+            result.Append(b.ToString("x2"));
+
+        return result.ToString();
+    }
+}
 }
