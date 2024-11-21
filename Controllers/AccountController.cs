@@ -29,7 +29,6 @@ public class AccountController : Controller
     
         if (usuario != null)
         {
-            Console.WriteLine($"Usuario logueado: {usuario.IdUsuario}");
             HttpContext.Session.SetInt32("UserId", usuario.IdUsuario);
             return RedirectToAction("Index", "Home");
         }
@@ -66,9 +65,6 @@ public IActionResult RegistroPersonal(Trabajador tj)
     ViewBag.Error = "El trabajador ya existe.";
     return View(tj);
 }
-
-
-
 
     [HttpPost]
     public IActionResult Register(Usuario usuario)
@@ -126,30 +122,23 @@ public IActionResult añadirMascotaAUsuario (){
     [HttpPost]
 public IActionResult añadirMascotaAUsuario(Perro perro)
 {
-    int idUsuario = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
-    bool result = BD.AgregarMascota(idUsuario, perro);
+    int? userId = HttpContext.Session.GetInt32("UserId");
+    bool result = BD.AgregarMascota(userId, perro);
     if (result == false)
     {
         ViewBag.Mensaje = "Tu mascota no se pudo añadir con éxito";
-    }
-    else
-    {
-        ViewBag.Mensaje = result;
     }
     return View();
 }
 
     private string HashPassword(string password)
 {
-    // Convertir la contraseña a bytes
     byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
     
-    // Calcular el hash de la contraseña
     using (SHA256 sha256 = SHA256.Create())
     {
         byte[] hashBytes = sha256.ComputeHash(passwordBytes);
         
-        // Convertir el hash a una cadena hexadecimal
         StringBuilder result = new StringBuilder();
         foreach (byte b in hashBytes)
             result.Append(b.ToString("x2"));

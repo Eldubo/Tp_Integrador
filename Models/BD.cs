@@ -55,7 +55,7 @@ public class BD
         }
     }
 
-    public static bool AgregarMascota(int id, Perro perro)
+    public static bool AgregarMascota(int? id, Perro perro)
 {
     bool result = false;
     string sql = "INSERT INTO Perro (Nombre, Fnac, IdUsuario) VALUES (@pNombre, @pFnac, @pIdUsuario)";
