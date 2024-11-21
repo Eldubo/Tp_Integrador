@@ -29,5 +29,11 @@ namespace PrimerProyecto.Controllers
 
             return View();
         }
+        public IActionResult Perfil(){
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            var usuario = BD.BuscarPersonaPorId(userId.Value);
+            ViewBag.User = usuario;
+            return View();
+        }
     }
 }
