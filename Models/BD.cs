@@ -55,9 +55,9 @@ public class BD
         }
     }
 
-    public static string AgregarMascota(int id, Perro perro)
+    public static bool AgregarMascota(int id, Perro perro)
 {
-    string result = null;
+    bool result = false;
     string sql = "INSERT INTO Perro (Nombre, Fnac, IdUsuario) VALUES (@pNombre, @pFnac, @pIdUsuario)";
     using (SqlConnection db = new SqlConnection(conexion))
     {
@@ -67,7 +67,7 @@ public class BD
             pFnac = perro.Fnac,
             pIdUsuario = id
         });
-        result = "La mascota fue añadida con éxito";
+        result = true;
     }
     return result;
 }

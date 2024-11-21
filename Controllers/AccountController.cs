@@ -126,7 +126,7 @@ public IActionResult añadirMascotaAUsuario(Perro perro)
 {
     int idUsuario = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
     string result = BD.AgregarMascota(idUsuario, perro);
-    if (result == null)
+    if (result == false)
     {
         ViewBag.Mensaje = "Tu mascota no se pudo añadir con éxito";
     }
@@ -139,33 +139,21 @@ public IActionResult añadirMascotaAUsuario(Perro perro)
 
     private string HashPassword(string password)
 {
-    // Generar un salt aleatorio
-    byte[] saltBytes = new byte[16];
-    using (var rng = RandomNumberGenerator.Create())
-    {
-        rng.GetBytes(saltBytes);
-    }
-    
-    // Combinar el salt con la contraseña
+    // Convertir la contraseña a bytes
     byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-    byte[] passwordWithSaltBytes = new byte[saltBytes.Length + passwordBytes.Length];
-    Buffer.BlockCopy(saltBytes, 0, passwordWithSaltBytes, 0, saltBytes.Length);
-    Buffer.BlockCopy(passwordBytes, 0, passwordWithSaltBytes, saltBytes.Length, passwordBytes.Length);
-
-    // Calcular el hash del resultado
+    
+    // Calcular el hash de la contraseña
     using (SHA256 sha256 = SHA256.Create())
     {
-        byte[] hashBytes = sha256.ComputeHash(passwordWithSaltBytes);
+        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
         
-        // Concatenar el salt y el hash en una sola cadena
+        // Convertir el hash a una cadena hexadecimal
         StringBuilder result = new StringBuilder();
-        foreach (byte b in saltBytes)
-            result.Append(b.ToString("x2"));
-        
         foreach (byte b in hashBytes)
             result.Append(b.ToString("x2"));
 
         return result.ToString();
     }
 }
+
 }
