@@ -5,14 +5,15 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace PrimerProyecto.Controllers;
-
 public class AccountController : Controller
 {
+    private Usuario usuario;
     private readonly ILogger<HomeController> _logger;
 
     public AccountController(ILogger<HomeController> logger)
     {
         _logger = logger;
+        usuario = new Usuario();
     }
 
     public IActionResult Login()
@@ -24,12 +25,13 @@ public class AccountController : Controller
     public IActionResult Login(string mail, string contraseña)
     {
         string hashedPassword = HashPassword(contraseña);
-        var usuarioEncontrado = BD.BuscarUsuario(mail, hashedPassword);
+        usuario = BD.BuscarUsuario(mail, hashedPassword);
     
-        if (usuarioEncontrado != null)
+        if (usuario != null)
         {
-            HttpContext.Session.SetInt32("UserId", usuarioEncontrado.Id);
-                return RedirectToAction("Index", "Home");
+            Console.WriteLine($"Usuario logueado: {usuario.IdUsuario}");
+            HttpContext.Session.SetInt32("UserId", usuario.IdUsuario);
+            return RedirectToAction("Index", "Home");
         }
 
         ViewBag.Error = "Contraseña incorrecta";
@@ -125,7 +127,7 @@ public IActionResult añadirMascotaAUsuario (){
 public IActionResult añadirMascotaAUsuario(Perro perro)
 {
     int idUsuario = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
-    string result = BD.AgregarMascota(idUsuario, perro);
+    bool result = BD.AgregarMascota(idUsuario, perro);
     if (result == false)
     {
         ViewBag.Mensaje = "Tu mascota no se pudo añadir con éxito";

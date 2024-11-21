@@ -4,7 +4,7 @@ using System.Text.Json;
 public class Usuario
 {
     [Key] // Anotación opcional para indicar que esta es la clave primaria
-    public int Id { get; set; } // Propiedad para el ID autogenerado
+    public int IdUsuario { get; set; } // Propiedad para el ID autogenerado
 
     public string Contraseña { get; set; }
     public string Nombre { get; set; }

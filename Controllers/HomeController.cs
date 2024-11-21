@@ -2,21 +2,22 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PrimerProyecto.Models;
 
-namespace PrimerProyecto.Controllers;
-
-public class HomeController : Controller
+namespace PrimerProyecto.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public IActionResult Index()
+        public HomeController(ILogger<HomeController> logger)
         {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            // Recuperar el ID del usuario de la sesión
             int? userId = HttpContext.Session.GetInt32("UserId");
-            
+
             if (userId.HasValue)
             {
                 // Si el usuario está logueado, obtenemos su información
@@ -31,4 +32,5 @@ public class HomeController : Controller
 
             return View();
         }
+    }
 }
