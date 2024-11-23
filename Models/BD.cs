@@ -100,4 +100,7 @@ public static void AñadirTrabajador (Trabajador trabajador){
             });
     }
 }
+public static Trabajador buscarTrabajadorConCaracteristicas(string opcion, string ciudad){
+    string sql = "SELECT * FROM TRABAJADORES WHERE ";
+}
 }

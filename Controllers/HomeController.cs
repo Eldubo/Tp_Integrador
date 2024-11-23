@@ -29,10 +29,18 @@ namespace PrimerProyecto.Controllers
 
             return View();
         }
+        [HttpPost]
+        public ActionResult Index(string tipoPaseo, string ciudad){
+            
+            return View("verPaseadores");
+        }
         public IActionResult Perfil(){
             int? userId = HttpContext.Session.GetInt32("UserId");
             var usuario = BD.BuscarPersonaPorId(userId.Value);
             ViewBag.User = usuario;
+            return View();
+        }
+        public IActionResult verPaseadores(){
             return View();
         }
     }
