@@ -12,6 +12,7 @@ namespace PrimerProyecto.Controllers
         {
             _logger = logger;
         }
+        private static List<Trabajador> trabajadores = new List<Trabajador>();
 
         public IActionResult Index()
         {
@@ -31,6 +32,7 @@ namespace PrimerProyecto.Controllers
         }
         [HttpPost]
         public ActionResult Index(string tipoPaseo, string ciudad){
+           trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo, ciudad);
             
             return View("verPaseadores");
         }
@@ -41,6 +43,7 @@ namespace PrimerProyecto.Controllers
             return View();
         }
         public IActionResult verPaseadores(){
+            ViewBag.Trabajadores = trabajadores;
             return View();
         }
     }

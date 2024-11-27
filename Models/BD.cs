@@ -100,7 +100,28 @@ public static void AñadirTrabajador (Trabajador trabajador){
             });
     }
 }
-public static Trabajador buscarTrabajadorConCaracteristicas(string opcion, string ciudad){
-    string sql = "SELECT * FROM TRABAJADORES WHERE ";
+public static List<Trabajador> BuscarTrabajadoresConCaracteristicas(string tipo, string ciudad)
+{
+    List<Trabajador> trabajadores = new List<Trabajador>();
+    string sql = "SELECT * FROM Trabajador WHERE Ciudad = @pCiudad";
+
+    if (tipo?.ToLower() == "paseo")
+    {
+        sql += " AND Paseo = 'true'"; 
+    }
+    else if (tipo?.ToLower() == "cuidado")
+    {
+        sql += " AND Cuidado = 'true'";
+    }
+
+    using (SqlConnection db = new SqlConnection(conexion))
+    {
+        trabajadores = db.Query<Trabajador>(sql, new { pCiudad = ciudad }).ToList();
+    }
+
+    return trabajadores;
 }
+
+
+
 }
