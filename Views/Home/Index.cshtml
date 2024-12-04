@@ -21,7 +21,7 @@
             <div class="user-icons">
                 @if (ViewBag.User != null)
                 {
-                    <h1>Bienvenido @ViewBag.User.Nombre</h1>
+                    <a href="@Url.Action("Perfil", "Home")">Bienvenido @ViewBag.User.Nombre </a>
                     <a href="#"><i class="fa-solid fa-calendar-days" style="color: #2b2b2b;"></i></a>
                 }
                 else

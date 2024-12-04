@@ -55,7 +55,7 @@ public class BD
         }
     }
 
-    public static bool AgregarMascota(int id, Perro perro)
+    public static bool AgregarMascota(int? id, Perro perro)
 {
     bool result = false;
     string sql = "INSERT INTO Perro (Nombre, Fnac, IdUsuario) VALUES (@pNombre, @pFnac, @pIdUsuario)";
@@ -100,4 +100,28 @@ public static void AñadirTrabajador (Trabajador trabajador){
             });
     }
 }
+public static List<Trabajador> BuscarTrabajadoresConCaracteristicas(string tipo, string ciudad)
+{
+    List<Trabajador> trabajadores = new List<Trabajador>();
+    string sql = "SELECT * FROM Trabajador WHERE Ciudad = @pCiudad";
+
+    if (tipo?.ToLower() == "paseo")
+    {
+        sql += " AND Paseo = 'true'"; 
+    }
+    else if (tipo?.ToLower() == "cuidado")
+    {
+        sql += " AND Cuidado = 'true'";
+    }
+
+    using (SqlConnection db = new SqlConnection(conexion))
+    {
+        trabajadores = db.Query<Trabajador>(sql, new { pCiudad = ciudad }).ToList();
+    }
+
+    return trabajadores;
+}
+
+
+
 }
