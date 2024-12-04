@@ -12,6 +12,7 @@ namespace PrimerProyecto.Controllers
         {
             _logger = logger;
         }
+
         private static List<Trabajador> trabajadores = new List<Trabajador>();
 
         public IActionResult Index()
@@ -30,21 +31,31 @@ namespace PrimerProyecto.Controllers
 
             return View();
         }
+
         [HttpPost]
-        public ActionResult Index(string tipoPaseo, string ciudad){
-           trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo, ciudad);
-            
-            return View("verPaseadores");
+        public IActionResult Index(string tipoPaseo, string ciudad)
+        {
+            trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo, ciudad);
+            return RedirectToAction("verPaseadores");
         }
-        public IActionResult Perfil(){
+
+        public IActionResult Perfil()
+        {
             int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (!userId.HasValue)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var usuario = BD.BuscarPersonaPorId(userId.Value);
             ViewBag.User = usuario;
             return View();
         }
-        public IActionResult verPaseadores(){
-            ViewBag.Trabajadores = trabajadores;
-            return View();
+
+        public IActionResult verPaseadores()
+        {
+            return View(trabajadores);
         }
     }
 }
