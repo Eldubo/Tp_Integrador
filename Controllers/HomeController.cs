@@ -13,7 +13,7 @@ namespace PrimerProyecto.Controllers
             _logger = logger;
         }
 
-        private static List<Trabajador> trabajadores = new List<Trabajador>();
+        public static List<Trabajador> trabajadores = new List<Trabajador>();
 
         public IActionResult Index()
         {
@@ -55,6 +55,7 @@ namespace PrimerProyecto.Controllers
 
         public IActionResult verPaseadores()
         {
+            ViewBag.Trabajadores = trabajadores;
             return View(trabajadores);
         }
     }

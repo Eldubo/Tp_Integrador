@@ -1,10 +1,17 @@
-@foreach (var trabajador in ViewBag.Trabajadores)
+@if (ViewBag.Trabajadores != null)
 {
-    <div>
-        <h4>@trabajador.Nombre</h4>
-        <p>Email: @trabajador.Mail</p>
-        <p>Ciudad: @trabajador.Ciudad</p>
-        <p>Paseo: @(trabajador.Paseo ? "Sí" : "No")</p>
-        <p>Cuidado: @(trabajador.Cuidado ? "Sí" : "No")</p>
-    </div>
+    foreach (var trabajador in ViewBag.Trabajadores)
+    {
+        <div>
+            <h4>@trabajador.Nombre</h4>
+            <p>Email: @trabajador.Mail</p>
+            <p>Ciudad: @trabajador.Ciudad</p>
+            <p>Paseo: @(trabajador.Paseo ? "Sí" : "No")</p>
+            <p>Cuidado: @(trabajador.Cuidado ? "Sí" : "No")</p>
+        </div>
+    }
+}
+else
+{
+    <p>No hay trabajadores disponibles.</p>
 }

@@ -122,13 +122,8 @@ public IActionResult añadirMascotaAUsuario (){
     [HttpPost]
 public IActionResult añadirMascotaAUsuario(Perro perro)
 {
-<<<<<<< HEAD
     int idUsuario = Convert.ToInt32(HttpContext.Session.GetString("UserId"));
     bool result = BD.AgregarMascota(idUsuario, perro);
-=======
-    int? userId = HttpContext.Session.GetInt32("UserId");
-    bool result = BD.AgregarMascota(userId, perro);
->>>>>>> cf08f69cd014e58506f7408ce5fdfa0e8181bf13
     if (result == false)
     {
         ViewBag.Mensaje = "Tu mascota no se pudo añadir con éxito";
