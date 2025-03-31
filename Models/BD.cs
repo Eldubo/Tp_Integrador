@@ -1,4 +1,4 @@
-    using Dapper;
+using Dapper;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
@@ -119,8 +119,11 @@ public static List<Trabajador> BuscarTrabajadoresConCaracteristicas(string tipo,
         trabajadores = db.Query<Trabajador>(sql, new { pCiudad = ciudad }).ToList();
     }
 
+    Console.WriteLine($"Trabajadores encontrados: {trabajadores.Count}");
+    
     return trabajadores;
 }
+
 
 
 
