@@ -56,36 +56,38 @@ public class BD
     }
 
     public static bool AgregarMascota(int? id, Perro perro)
-{
-    bool result = false;
-    string sql = "INSERT INTO Perro (Nombre, Fnac, IdUsuario) VALUES (@pNombre, @pFnac, @pIdUsuario)";
-    using (SqlConnection db = new SqlConnection(conexion))
     {
-        db.Execute(sql, new
+        bool result = false;
+        string sql = "INSERT INTO Perro (Nombre, Fnac, IdUsuario) VALUES (@pNombre, @pFnac, @pIdUsuario)";
+        using (SqlConnection db = new SqlConnection(conexion))
         {
-            pNombre = perro.Nombre,
-            pFnac = perro.Fnac,
-            pIdUsuario = id
-        });
-        result = true;
+            db.Execute(sql, new
+            {
+                pNombre = perro.Nombre,
+                pFnac = perro.Fnac,
+                pIdUsuario = id
+            });
+            result = true;
+        }
+        return result;
     }
-    return result;
-}
-public static Usuario BuscarPersonaPorId(int id)
-{
-    Usuario usuario = null;
-    using (SqlConnection db = new SqlConnection(conexion))
+    public static Usuario BuscarPersonaPorId(int id)
     {
-        string sql = "SELECT * FROM Usuario WHERE IdUsuario = @pId";
-        usuario = db.QueryFirstOrDefault<Usuario>(sql, new { pId = id });
+        Usuario usuario = null;
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            string sql = "SELECT * FROM Usuario WHERE IdUsuario = @pId";
+            usuario = db.QueryFirstOrDefault<Usuario>(sql, new { pId = id });
+        }
+        return usuario;
     }
-    return usuario;
-}
 
-public static void AñadirTrabajador (Trabajador trabajador){
-    string sql = "INSERT INTO Trabajador (DNI, Nombre, Mail, Telefono, Fnac, CVUAlias, Paseo, Cuidado, Ciudad, Contraseña) VALUES (@pdni, @pNombre, @pMail, @pTelefono, @pFnac, @pcvualias, @pPaseo, @pCuidado, @pCiudad, @pContraseña)";
-    using (SqlConnection db = new SqlConnection(conexion)){
-        db.Execute(sql, new
+    public static void AñadirTrabajador(Trabajador trabajador)
+    {
+        string sql = "INSERT INTO Trabajador (DNI, Nombre, Mail, Telefono, Fnac, CVUAlias, Paseo, Cuidado, Ciudad, Contraseña) VALUES (@pdni, @pNombre, @pMail, @pTelefono, @pFnac, @pcvualias, @pPaseo, @pCuidado, @pCiudad, @pContraseña)";
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            db.Execute(sql, new
             {
                 pdni = trabajador.DNI,
                 pNombre = trabajador.Nombre,
@@ -98,31 +100,31 @@ public static void AñadirTrabajador (Trabajador trabajador){
                 pCiudad = trabajador.Ciudad,
                 pContraseña = trabajador.Contraseña
             });
+        }
     }
-}
-public static List<Trabajador> BuscarTrabajadoresConCaracteristicas(string tipo, string ciudad)
-{
-    List<Trabajador> trabajadores = new List<Trabajador>();
-    string sql = "SELECT * FROM Trabajador WHERE Ciudad = @pCiudad";
-
-    if (tipo?.ToLower() == "paseo")
+    public static List<Trabajador> BuscarTrabajadoresConCaracteristicas(string tipo, string ciudad)
     {
-        sql += " AND Paseo = 'true'"; 
-    }
-    else if (tipo?.ToLower() == "cuidado")
-    {
-        sql += " AND Cuidado = 'true'";
-    }
+        List<Trabajador> trabajadores = new List<Trabajador>();
+        /*string sql = "SELECT * FROM Trabajador WHERE Ciudad = @pCiudad";
 
-    using (SqlConnection db = new SqlConnection(conexion))
-    {
-        trabajadores = db.Query<Trabajador>(sql, new { pCiudad = ciudad }).ToList();
-    }
+        if (tipo?.ToLower() == "paseo")
+        {
+            sql += " AND Paseo = 'TRUE'"; 
+        }
+        else if (tipo?.ToLower() == "cuidado")
+        {
+            sql += " AND Cuidado = 'TRUE'";
+        }*/
+        string sql = "SELECT * FROM Trabajador";
+        using (SqlConnection db = new SqlConnection(conexion))
+        {
+            trabajadores = db.Query<Trabajador>(sql, new { pCiudad = ciudad }).ToList();
+        }
 
-    Console.WriteLine($"Trabajadores encontrados: {trabajadores.Count}");
-    
-    return trabajadores;
-}
+        Console.WriteLine($"Trabajadores encontrados: {trabajadores.Count}");
+
+        return trabajadores;
+    }
 
 
 

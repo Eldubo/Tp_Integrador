@@ -33,13 +33,17 @@ namespace PrimerProyecto.Controllers
             return View();
         }
 
-[HttpPost]
-public IActionResult Index(string tipoPaseo, string ciudad)
-{
-    trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo, ciudad);
-    HttpContext.Session.SetString("Trabajadores", Newtonsoft.Json.JsonConvert.SerializeObject(trabajadores));
-    return RedirectToAction("verPaseadores");
-}
+        [HttpPost]
+        public IActionResult Index(string tipoPaseo, string ciudad)
+        {
+            tipoPaseo = "Paseo";
+            ciudad = "Buenos Aires";
+            trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo, ciudad);
+
+            HttpContext.Session.SetString("Trabajadores", Newtonsoft.Json.JsonConvert.SerializeObject(trabajadores));
+            return RedirectToAction("verPaseadores");
+            //return Ok(trabajadores);
+        }
 
         public IActionResult Perfil()
         {
@@ -56,17 +60,17 @@ public IActionResult Index(string tipoPaseo, string ciudad)
         }
 
         public IActionResult verPaseadores()
-{
-    var trabajadoresJson = HttpContext.Session.GetString("Trabajadores");
-    if (trabajadoresJson != null)
-    {
-        ViewBag.Trabajadores = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Trabajador>>(trabajadoresJson);
-    }
-    else
-    {
-        ViewBag.Trabajadores = new List<Trabajador>();
-    }
-    return View();
-}
+        {
+            var trabajadoresJson = HttpContext.Session.GetString("Trabajadores");
+            if (trabajadoresJson != null)
+            {
+                ViewBag.Trabajadores = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Trabajador>>(trabajadoresJson);
+            }
+            else
+            {
+                ViewBag.Trabajadores = new List<Trabajador>();
+            }
+            return View();
+        }
     }
 }
