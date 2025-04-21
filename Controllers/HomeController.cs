@@ -36,14 +36,13 @@ namespace PrimerProyecto.Controllers
         [HttpPost]
         public IActionResult Index(string tipoPaseo, string ciudad)
         {
-            tipoPaseo = "Paseo";
-            ciudad = "Buenos Aires";
             trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo, ciudad);
 
-            HttpContext.Session.SetString("Trabajadores", Newtonsoft.Json.JsonConvert.SerializeObject(trabajadores));
+            HttpContext.Session.SetString("Trabajadores", JsonConvert.SerializeObject(trabajadores));
             return RedirectToAction("verPaseadores");
-            //return Ok(trabajadores);
         }
+
+
 
         public IActionResult Perfil()
         {

@@ -34,16 +34,18 @@
             <h2>Reserva tu paseo</h2>
             <img src="img/perro.jpg" alt="Paseo de perros" class="hero-image">
             <div class="search-bar">
-                <div class="dropdown">
-                    <label for="options">Elige una opción:</label>
-                    <select id="options">
-                        <option value="Paseo">Paseo</option>
-                        <option value="Cuidado">Cuidado</option>
-                    </select>
-                </div>
-                <input type="text" placeholder="CABA" class="search-input">
-                <a href = "@Url.Action("verPaseadores", "Home")"><button class="search-button">Buscar</button></a>
+            <form method="post" action="@Url.Action("Index", "Home")" class="search-bar">
+            <div class="dropdown">
+                 <label for="tipoPaseo">Elige una opción:</label>
+                 <select id="tipoPaseo" name="tipoPaseo">
+                  <option value="Paseo">Paseo</option>
+                <option value="Cuidado">Cuidado</option>
+                </select>
             </div>
+             <input type="text" placeholder="CABA" class="search-input" name="ciudad">
+             <button type="submit" class="search-button">Buscar</button>
+        </form>
+
         </div>
     </header>
     <!-- Sección "Qué Somos" -->

@@ -7,8 +7,9 @@ cantidad @ViewBag.Trabajadores.Count
             <h4>@trabajador.Nombre</h4>
             <p>Email: @trabajador.Mail</p>
             <p>Ciudad: @trabajador.Ciudad</p>
-            <p>Paseo: @(trabajador.Paseo ? "Sí" : "No")</p>
-            <p>Cuidado: @(trabajador.Cuidado ? "Sí" : "No")</p>
+            <p>Paseo: @(trabajador.Paseo == "true" ? "Sí" : "No")</p>
+            <p>Cuidado: @(trabajador.Cuidado == "true" ? "Sí" : "No")</p>
+
         </div>
     }
 }
