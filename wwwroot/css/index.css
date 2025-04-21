@@ -55,31 +55,50 @@ body {
     font-size: 1.2em;
 }
 
-/* Imagen hero y barra de búsqueda */
-.hero {
-    position: relative;
-    text-align: center;
-    background-color: #362F27;
-    width: auto;
+.busqueda{
+    background-color: #AF7C4D;
+    border-color:  solid black 1px;
+    border-radius: 16px;
 }
 
-.hero-image {
-    width: 100%;
+.hero {
+    position: relative;
     height: 500px;
-    object-fit: cover;
-    opacity: 0.8;
+    background-image: url('../img/perro.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* oscurece un poco la imagen */
+    z-index: 1;
+}
+
+.hero h2,
+.hero .search-bar {
+    position: relative;
+    z-index: 2;
+    padding: 16px;
 }
 
 .search-bar {
-    position: absolute;
-    bottom: 20px;
-    left: 38%;
-    transform: translateX(-50%);
     display: flex;
     gap: 10px;
+    margin-top: 16px;
 }
 
-.search-input {
+.search-input,
+select {
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #865433;
@@ -88,11 +107,12 @@ body {
 .search-button {
     padding: 8px 16px;
     background-color: #AF7C4D;
-    color: #362F27;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+
 
 /* Sección "Qué Somos" */
 .about {
@@ -143,15 +163,20 @@ body {
 
 /* Pie de página */
 footer {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px; 
     text-align: center;
     padding: 20px;
     background-color: #865433;
     color: white;
 }
 
+.social-icons i {
+    color: white;
+    margin: 0 7px;
+    font-size: 1.2em;
+}
 .column p {
     margin: 5px 0; 
 }
