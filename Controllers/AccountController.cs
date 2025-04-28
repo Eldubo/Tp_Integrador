@@ -54,7 +54,7 @@ public IActionResult RegistroPersonal(Trabajador tj)
 
     tj.Paseo = !string.IsNullOrEmpty(tj.Paseo) && tj.Paseo == "true" ? "true" : "false";
     tj.Cuidado = !string.IsNullOrEmpty(tj.Cuidado) && tj.Cuidado == "true" ? "true" : "false";
-
+    tj.Ciudad = tj.Ciudad.ToLower();
     var trabajadorencontrado = BD.BuscarTrabajador(tj.Mail, tj.Contraseña);
 
     if (trabajadorencontrado == null)

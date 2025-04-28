@@ -102,10 +102,11 @@ public class BD
             });
         }
     }
+
     public static List<Trabajador> BuscarTrabajadoresConCaracteristicas(string tipo, string ciudad)
     {
         List<Trabajador> trabajadores = new List<Trabajador>();
-        /*string sql = "SELECT * FROM Trabajador WHERE Ciudad = @pCiudad";
+        string sql = "SELECT * FROM Trabajador WHERE Ciudad = @pCiudad";
 
         if (tipo?.ToLower() == "paseo")
         {
@@ -114,8 +115,7 @@ public class BD
         else if (tipo?.ToLower() == "cuidado")
         {
             sql += " AND Cuidado = 'TRUE'";
-        }*/
-        string sql = "SELECT * FROM Trabajador";
+        }
         using (SqlConnection db = new SqlConnection(conexion))
         {
             trabajadores = db.Query<Trabajador>(sql, new { pCiudad = ciudad }).ToList();

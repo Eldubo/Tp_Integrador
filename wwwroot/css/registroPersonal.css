@@ -3,11 +3,11 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    /* No usamos align-items: center para permitir scroll si el form es largo */
 }
 
 /* Estilo del contenedor del formulario */
@@ -83,7 +83,7 @@ div {
     margin-bottom: 20px;
 }
 
-/* Estilo para los inputs de texto, contraseñas y fecha */
+/* Estilo para los inputs en focus */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="number"]:focus,
@@ -94,7 +94,7 @@ input[type="password"]:focus {
     outline: none;
 }
 
-/* Estilo para el formulario en dispositivos móviles */
+/* Responsive para móviles */
 @media (max-width: 600px) {
     form {
         padding: 15px;

@@ -36,7 +36,7 @@ namespace PrimerProyecto.Controllers
         [HttpPost]
         public IActionResult Index(string tipoPaseo, string ciudad)
         {
-            trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo, ciudad);
+            trabajadores = BD.BuscarTrabajadoresConCaracteristicas(tipoPaseo.ToLower(), ciudad.ToLower());
 
             HttpContext.Session.SetString("Trabajadores", JsonConvert.SerializeObject(trabajadores));
             return RedirectToAction("verPaseadores");
