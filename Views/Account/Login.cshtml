@@ -1,25 +1,38 @@
 <link rel="stylesheet" href="~/css/Login.css">
-<div id='login'>
-    <h1>Inicio de sesion </h1>
-    <div id='formulario'>
-        <form id="loginForm"asp-action="Login" method="post">
-            <label for="username">Email</label>
-            <input type="text" id="username" name="mail" placeholder="example@example.com"required>
+    
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <img src="~/img/logo.png" alt="Huellitas Felices">
+            </div>
+        </div>
+    </header>
 
-            <label for="contraseña">Contraseña</label>
-            <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
+<body>
+    <div id="wrapper">
+        <div id='login'>
+            <h1>Inicio de sesion </h1>
+            <div id='formulario'>
+                <form id="loginForm"asp-action="Login" method="post">
+                    <label for="username">Email</label>
+                    <input type="text" id="username" name="mail" placeholder="example@example.com"required>
 
-    <div class="mensaje-error">
-    <a href="@Url.Action("Register", "Account")">¿No tenés cuenta? Registrate</a>
-    <a href="@Url.Action("RegistroPersonal" ,"Account")"> Queres ser paseador/cuidador?</a>
-    <a href="@Url.Action("CambiarContraseña","Account")">¿Olvidaste tu contraseña? Cambia tu contraseña</a>
-    @if (!string.IsNullOrEmpty(ViewBag.Error)){
-    <p id="error">@ViewBag.Error</p>
-        <a href="@Url.Action("Login", "Account")">Volver a intentar</a>
-        <a href="@Url.Action("RecuperarContraseña", "Account")">Recuperar contraseña</a>
-    }
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="Contraseña" placeholder="Contraseña" required>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+
+            <div class="mensaje-error">
+            <a href="@Url.Action("Register", "Account")">¿No tenés cuenta? Registrate</a>
+            <a href="@Url.Action("RegistroPersonal" ,"Account")"> Queres ser paseador/cuidador?</a>
+            <a href="@Url.Action("CambiarContraseña","Account")">¿Olvidaste tu contraseña? Cambia tu contraseña</a>
+            @if (!string.IsNullOrEmpty(ViewBag.Error)){
+            <p id="error">@ViewBag.Error</p>
+                <a href="@Url.Action("Login", "Account")">Volver a intentar</a>
+                <a href="@Url.Action("RecuperarContraseña", "Account")">Recuperar contraseña</a>
+            }
+            </div>
+        </div>
     </div>
-</div>
+</body>
